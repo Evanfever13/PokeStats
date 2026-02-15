@@ -1,0 +1,66 @@
+{{define "Teams"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokestats</title>
+    <link rel="stylesheet" href="/static/styles/Teams.css">
+</head>
+<body>
+    {{if .Header}}
+    <header class="site-header">
+        <a href="/" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Home</p>
+        </a>
+
+        <a href="/pokemon" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Pokemon</p>
+        </a>
+
+        <a href="/moves" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Moves</p>
+        </a>
+
+        <a href="/" class="mainlogo">
+            <img src="/static/img/Logo.png" alt="Logo of Pokestrat">
+        </a>
+
+        <a href="/teams" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Teams</p>
+        </a>
+
+        <a href="/about" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>About</p>
+        </a>
+
+        <a href="/login" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Login</p>
+        </a>
+    </header>
+    {{end}}
+    <main>
+        <div class="teams-center">
+            <div class="teams-grid">
+                    {{range $i, $t := .Teams}}
+                        <div class="BlocWelcome pokemon-card">
+                            <a class="remove-button" href="/teams?remove={{$t.ID}}">Remove</a>
+                            <a class="pokemon-link" href="/pokemon/details?id={{$t.ID}}">
+                                <div class="pokemon-name" style="text-transform: capitalize">{{$t.Name}}</div>
+                                <div class="pokemon-number">#{{$t.ID}}</div>
+                                <img src="{{$t.Image}}" alt="{{$t.Name}}" class="pokemon-img">
+                            </a>
+                        </div>
+                    {{end}}
+                </div>
+        </div>
+    </main>
+</body>
+</html>
+{{end}}

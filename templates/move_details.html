@@ -1,0 +1,88 @@
+{{define "MoveDetails"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/Details.css">
+    <title>PokeStats - {{.Name}}</title>
+</head>
+<body>
+    <header>
+
+        <a href="/" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Home</p>
+        </a>
+
+        <a href="/pokemon" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Pokemon</p>
+        </a>
+
+        <a href="/moves" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Moves Logo">
+            <p>Moves</p>
+        </a>
+
+        <a href="/" class="mainlogo">
+            <img src="/static/img/Logo.png" alt="Logo of Pokestrat">
+        </a>
+
+        <a href="/teams" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Teams</p>
+        </a>
+
+        <a href="/about" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>About</p>
+        </a>
+
+        <a href="/login" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Login</p>
+        </a>
+
+    </header>
+
+    <main>
+        <div class="left-grid">
+            <p>left</p>
+        </div>
+        <div class="detail-info">
+            <h1 style="text-transform: capitalize">{{.Name}} <small style="color:#666">#{{.ID}}</small></h1>
+            <div class="detail-grid">
+                <div class="detail-info">
+                    <h3>Type</h3>
+                    <p style="text-transform: capitalize">{{.Type}}</p>
+
+                    <h3>Category</h3>
+                    <p style="text-transform: capitalize">{{.DamageClass}}</p>
+
+                    <h3>Power</h3>
+                    <p>{{if .Power}}{{.Power}}{{else}}—{{end}}</p>
+
+                    <h3>Accuracy</h3>
+                    <p>{{if .Accuracy}}{{.Accuracy}}{{else}}—{{end}}</p>
+
+                    <h3>PP</h3>
+                    <p>{{.PP}}</p>
+
+                    <h3>Short effect</h3>
+                    <p>{{.ShortEffect}}</p>
+
+                    <h3>Effect</h3>
+                    <p>{{.Effect}}</p>
+                </div>
+            </div>
+            <a href="/moves" class="button">Back to moves</a>
+        </div>
+        <div class="right-grid">
+            <p>right</p>
+        </div>
+        
+    </main>
+</body>
+</html>
+{{end}}

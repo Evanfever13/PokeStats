@@ -1,0 +1,242 @@
+
+*{
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+/* Fonts*/
+
+@font-face{
+	font-family: 'Gill Sans Local';
+	src: url('../font/Gill Sans.otf') format('opentype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face{
+	font-family: 'Gill Sans Local';
+	src: url('../font/Gill Sans Bold.otf') format('opentype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Body */
+
+body{
+	font-family: 'Gill Sans Local', 'Gill Sans', 'GillSans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+	background: #fafafa;
+	color: #111;
+}
+
+/* Header */
+
+header{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 36px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    min-height: 110px;
+	padding: 12px 16px;
+}
+header a.logo img{
+	width: 56px;
+	height: 56px;
+	object-fit: contain;
+}
+header a.logo p{
+	font-size: 16px;
+	margin: 0;
+}
+header a.logo, header a.mainlogo{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: inherit;
+	text-decoration: none;
+	height: 64px;
+}
+header a.mainlogo{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+}
+header a.mainlogo img{
+	height: 96px;
+	object-fit: contain;
+}
+header a.logo:hover, header a.mainlogo:hover{
+	opacity: 0.9;
+}
+
+/* Main */
+
+main{
+	max-width: 1100px;
+	margin: 24px auto;
+	padding: 0 16px;
+	display: grid;
+	grid-template-columns: 1fr 360px;
+	gap: 20px;
+	align-items: start;
+}
+
+/* POKEMON.HTML */
+
+.pokemon-grid{
+	display: grid;
+	grid-template-columns: repeat(5, 160px);
+	justify-content: center;
+	gap: 32px;
+	align-items: start;
+	margin: 12px auto;
+	margin-left: 52px;
+}
+.pokemon-card{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 16px;
+	border-radius: 12px;
+	transition: transform 160ms ease, box-shadow 160ms ease;
+	background: #fff;
+	border: 1px solid #eee;
+}
+.pokemon-center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 24px 0;
+}
+.pokemon-name{
+	font-family: 'Gill Sans Local', 'Gill Sans', 'GillSans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+	color: #111;
+	text-decoration: none;
+}
+.pokemon-number{
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 6px;
+}
+.pokemon-img{
+	width: 140px;
+	height: 140px;
+	object-fit: contain;
+	margin-top: 6px;
+	background: linear-gradient(180deg, #fff, #f6f9ff);
+	padding: 10px;
+	border-radius: 10px;
+}
+.pokemon-pagination{
+	display: flex;
+	gap: 18px;
+	justify-content: center;
+	align-items: center;
+	margin-top: 18px;
+}
+.pokemon-card:hover{
+	transform: translateY(-6px);
+	box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+}
+
+.search-bar{
+	display: flex;
+	justify-content: center;
+	margin: 12px 0;
+}
+.search-form{
+	display: flex;
+	gap: 8px;
+}
+.search-form input[type="text"]{
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	width: 360px;
+	font-size: 14px;
+}
+.search-form button{
+	padding: 10px 14px;
+	border-radius: 8px;
+	border: none;
+	background: #157bd6;
+	color: #fff;
+	font-weight: 700;
+	cursor: pointer;
+}
+.search-form button:hover{
+	opacity: 0.95;
+}
+
+.pager{
+	display: inline-flex;
+	width: 64px;
+	height: 64px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: #157bd6;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 22px;
+	box-shadow: 0 6px 22px rgba(21,123,214,0.22);
+	transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+}
+.pager:hover{
+	box-shadow: 0 12px 28px rgba(21,123,214,0.25);
+	opacity: 0.98;
+}
+.pager-group{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.pager-left{
+	position: fixed;
+	left: 18px;
+	top: 50%;
+	z-index: 1200;
+}
+.pager-right{
+	position: fixed;
+	right: 18px;
+	top: 50%;
+	z-index: 1200;
+}
+.pager-label-left{
+	position: fixed;
+	left: 18px;
+	top: calc(50% + 48px);
+	z-index: 1200;
+	font-size: 14px;
+}
+.pager-label-right{
+	position: fixed;
+	right: 18px;
+	top: calc(50% + 48px);
+	z-index: 1200;
+	font-size: 14px;
+}
+.pager.disabled{
+	background: #ddd;
+	color: #888;
+	pointer-events: none;
+}

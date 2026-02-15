@@ -1,0 +1,88 @@
+{{define "PokemonDetails"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/Details.css">
+    <title>PokeStats - {{.Name}}</title>
+</head>
+<body>
+    <header>
+
+        <a href="/" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Home</p>
+        </a>
+
+        <a href="/pokemon" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Pokemon</p>
+        </a>
+
+        <a href="/moves" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Moves</p>
+        </a>
+
+        <a href="/" class="mainlogo">
+            <img src="/static/img/Logo.png" alt="Logo of Pokestrat">
+        </a>
+
+        <a href="/teams" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Teams</p>
+        </a>
+
+        <a href="/about" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>About</p>
+        </a>
+
+        <a href="/login" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Login</p>
+        </a>
+
+    </header>
+
+    <main>
+        <div class="left-grid">
+            <p>left</p>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-info">
+                <h1 style="text-transform: capitalize">{{.Name}} <small style="color:#666">#{{.ID}}</small></h1>
+                <div class="detail-grid">
+                    <div class="detail-image">
+                        <img src="{{.Image}}" alt="{{.Name}}">
+                    </div>
+                    <div class="detail-info">
+                        <h3>Types</h3>
+                        <p class="types">
+                            {{range $i, $t := .Types}}
+                                <img src="/static/img/Types/{{ $t }}.png" alt="{{ $t }}" class="type-badge" title="{{ $t }}">
+                            {{end}}
+                        </p>
+
+                        <h3>Abilities</h3>
+                        <p>{{range $i, $a := .Abilities}}{{if $i}}, {{end}}{{ $a }}{{end}}</p>
+
+                        <h3>Stats</h3>
+                        <ul>
+                        {{range $k, $v := .Stats}}
+                            <li style="text-transform: capitalize">{{$k}}: {{$v}}</li>
+                        {{end}}
+                        </ul>
+                    </div>
+                </div>
+                <a href="/pokemon" class="button">Back to list</a>
+            </div>
+        </div>
+        <div class="right-grid">
+            <a href="/teams?add={{.ID}}" class="button">Add to favorite</a>
+        </div>
+    </main>
+</body>
+</html>
+{{end}}

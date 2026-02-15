@@ -1,0 +1,107 @@
+{{define "Pokemon"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/Pokemon.css">
+    <title>PokeStats</title>
+</head>
+<body>
+    <header>
+
+        <a href="/" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Home</p>
+        </a>
+
+        <a href="/pokemon" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Pokemon</p>
+        </a>
+
+        <a href="/moves" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Moves</p>
+        </a>
+
+        <a href="/" class="mainlogo">
+            <img src="/static/img/Logo.png" alt="Logo of Pokestrat">
+        </a>
+
+        <a href="/teams" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Teams</p>
+        </a>
+
+        <a href="/about" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>About</p>
+        </a>
+
+        <a href="/login" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Login</p>
+        </a>
+
+
+    </header>
+
+    <div class="search-bar">
+        <form method="get" action="/pokemon" class="search-form">
+            <input type="text" name="search" placeholder="Search Pokémon by name or ID" value="{{.Search}}" />
+            <select name="type">
+                <option value="">
+                    All Types       
+                </option>
+                {{range $i, $t := .Types}}
+                    <option value="{{$t}}" {{if eq $t $.SelectedType}}selected{{end}}>{{$t}}</option>
+                {{end}}
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <main>
+             <div class="pokemon-center">
+                 <div class="pokemon-grid">
+                                 {{range .Results}}
+                                            <a class="pokemon-link" href="/pokemon/details?id={{pokemonID .Url}}">
+                                                <div class = "BlocWelcome pokemon-card">
+                                                        <div class="pokemon-name">{{.Name}}</div>
+                                                        <div class="pokemon-number">#{{pokemonID .Url}}</div>
+                                                        <img src="{{imageURL .Url}}" alt="{{.Name}}" class="pokemon-img">
+                                                </div>
+                                            </a>
+                                 {{end}}
+                 </div>
+
+                 <div class="pokemon-pagination">
+                     <div class="pager-group">
+                         {{ if eq .Offset 0 }}
+                             <span class="pager pager-left disabled">&#8592;</span>
+                         {{ else }}
+                             <a class="pager pager-left" href="/pokemon?offset={{.PrevOffset}}{{if .Search}}&search={{.Search}}{{end}}{{if .SelectedType}}&type={{.SelectedType}}{{end}}">&#8592;</a>
+                         {{ end }}
+                     </div>
+
+                     <div class="pager-group">
+                         <a class="pager pager-right" href="/pokemon?offset={{.NextOffset}}{{if .Search}}&search={{.Search}}{{end}}{{if .SelectedType}}&type={{.SelectedType}}{{end}}">&#8594;</a>
+                     </div>
+                 </div>
+             </div>
+    </main>
+</body>
+</html>
+{{end}}
+
+
+
+
+
+
+
+
+
+
+

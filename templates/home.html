@@ -1,0 +1,84 @@
+{{define "Home"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/Home.css">
+    <title>PokeStats</title>
+
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Home</p>
+        </a>
+
+        <a href="/pokemon" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Pokemon</p>
+        </a>
+
+        <a href="/moves" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Moves</p>
+        </a>
+
+        <a href="/" class="mainlogo">
+            <img src="/static/img/Logo.png" alt="Logo of Pokestrat">
+        </a>
+
+        <a href="/teams" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Teams</p>
+        </a>
+
+        <a href="/about" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>About</p>
+        </a>
+
+        <a href="/login" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Login</p>
+        </a>
+    </header>
+    
+    <main>
+        <div class = "BlocWelcome">
+            <h1>Welcome to PokeStats!</h1>
+            <p>Your ultimate Pokémon database and team builder.</p>
+            <p>Explore detailed stats, moves, and create your perfect team. </p>
+            <br>
+            <a href="/login" class="button">Sign In</a>
+            <a href="/login" class="button">Login</a>
+        </div>
+
+        <div class = "BlocGetStarted">
+            <h1>Get Started</h1>
+            <div>
+                <a href="/pokemon" class="button">Explore Pokémon</a>
+                <a href="/moves" class="button">Discover Moves</a>
+                <a href="/teams" class="button">Build Your Dream Team</a>
+            </div>
+        </div>
+        
+        <div class = "BlocImage">
+            <img src="/static/img/Logo.png" alt="Pokémon Image">
+            <br>
+            <img src="/static/img/HomeLogo.png" alt="">
+        </div>
+
+        <div class = "BlocAbout">
+            <h1>About PokeStats</h1>
+            <p>PokeStats is your go-to resource for comprehensive Pokémon information. Whether you're a casual player or a competitive battler, our database provides detailed stats, move sets, and team-building tools to enhance your gameplay experience.</p>
+            <a href="/about" class="button">About Us</a>
+            
+        </div>
+    </main>
+
+</body>
+</html>
+{{end}}

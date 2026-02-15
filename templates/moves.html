@@ -1,0 +1,88 @@
+{{define "Moves"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/Moves.css">
+    <title>PokeStats</title>
+</head>
+<body>
+    <header>
+
+        <a href="/" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Home</p>
+        </a>
+
+        <a href="/pokemon" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Pokemon</p>
+        </a>
+
+        <a href="/moves" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Moves Logo">
+            <p>Moves</p>
+        </a>
+
+        <a href="/" class="mainlogo">
+            <img src="/static/img/Logo.png" alt="Logo of Pokestrat">
+        </a>
+
+        <a href="/teams" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Teams</p>
+        </a>
+
+        <a href="/about" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>About</p>
+        </a>
+
+        <a href="/login" class="logo">
+            <img src="/static/img/HomeLogo.png" alt="Home Logo">
+            <p>Login</p>
+        </a>
+
+
+    </header>
+
+    <div class="search-bar">
+        <form method="get" action="/moves" class="search-form">
+            <input type="text" name="search" placeholder="Search move by name or ID" value="{{.Search}}" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <main>
+       <div class="pokemon-center">
+         <div class="pokemon-grid">
+                 {{range .Results}}
+                    <a class="pokemon-link" href="/moves/details?id={{pokemonID .Url}}">
+                        <div class = "BlocWelcome pokemon-card">
+                                <div class="pokemon-name">{{.Name}}</div>
+                                <div class="pokemon-number">#{{pokemonID .Url}}</div>
+                                <div class="move-desc">&nbsp;</div>
+                        </div>
+                    </a>
+                 {{end}}
+         </div>
+
+         <div class="pokemon-pagination">
+           <div class="pager-group">
+             {{ if eq .Offset 0 }}
+               <span class="pager pager-left disabled">&#8592;</span>
+             {{ else }}
+               <a class="pager pager-left" href="/moves?offset={{.PrevOffset}}">&#8592;</a>
+             {{ end }}
+           </div>
+
+           <div class="pager-group">
+             <a class="pager pager-right" href="/moves?offset={{.NextOffset}}">&#8594;</a>
+           </div>
+         </div>
+       </div>
+    </main>
+</body>
+</html>
+{{end}}
