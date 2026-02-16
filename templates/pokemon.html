@@ -47,49 +47,74 @@
 
     </header>
 
+    {{/* (Source : Ancien TP + StackOverflow) */}}
+    {{/* Permet de faire une barre de recherche pour les pokemons */}}
     <div class="search-bar">
         <form method="get" action="/pokemon" class="search-form">
             <input type="text" name="search" placeholder="Search Pokémon by name or ID" value="{{.Search}}" />
+
+            {{/* Permet de faire un menu déroulant pour les types de pokemons */}}
             <select name="type">
-                <option value="">
-                    All Types       
-                </option>
-                {{range $i, $t := .Types}}
-                    <option value="{{$t}}" {{if eq $t $.SelectedType}}selected{{end}}>{{$t}}</option>
-                {{end}}
+                <option value="">All Types</option>
+                <option value="bug">Bug</option>
+                <option value="dark">Dark</option>
+                <option value="dragon">Dragon</option>
+                <option value="electric">Electric</option>
+                <option value="fairy">Fairy</option>
+                <option value="fighting">Fighting</option>
+                <option value="fire">Fire</option>
+                <option value="flying">Flying</option>
+                <option value="ghost">Ghost</option>
+                <option value="grass">Grass</option>
+                <option value="ground">Ground</option>
+                <option value="ice">Ice</option>
+                <option value="normal">Normal</option>
+                <option value="poison">Poison</option>
+                <option value="psychic">Psychic</option>
+                <option value="rock">Rock</option>
+                <option value="steel">Steel</option>
+                <option value="water">Water</option>
             </select>
+            {{/* Le bouton pour envoyer le formulaire de recherche */}}
             <button type="submit">Search</button>
         </form>
     </div>
 
     <main>
-             <div class="pokemon-center">
-                 <div class="pokemon-grid">
-                                 {{range .Results}}
-                                            <a class="pokemon-link" href="/pokemon/details?id={{pokemonID .Url}}">
-                                                <div class = "BlocWelcome pokemon-card">
-                                                        <div class="pokemon-name">{{.Name}}</div>
-                                                        <div class="pokemon-number">#{{pokemonID .Url}}</div>
-                                                        <img src="{{imageURL .Url}}" alt="{{.Name}}" class="pokemon-img">
-                                                </div>
-                                            </a>
-                                 {{end}}
-                 </div>
+        
+        {{/* Affiche les pokemon */}}
+        <div class="pokemon-center">
+            <div class="pokemon-grid">
+                {{range .Results}}
+                        <a class="pokemon-link" href="/pokemon/details?id={{pokemonID .Url}}">
+                        <div class = "BlocWelcome pokemon-card">
+                            <div class="pokemon-name">{{.Name}}</div>
+                            <div class="pokemon-number">#{{pokemonID .Url}}</div>
+                            <img src="{{imageURL .Url}}" alt="{{.Name}}" class="pokemon-img">
+                        </div>
+                    </a>
+                {{end}}
+            </div>
+        </div>
 
-                 <div class="pokemon-pagination">
-                     <div class="pager-group">
-                         {{ if eq .Offset 0 }}
-                             <span class="pager pager-left disabled">&#8592;</span>
-                         {{ else }}
-                             <a class="pager pager-left" href="/pokemon?offset={{.PrevOffset}}{{if .Search}}&search={{.Search}}{{end}}{{if .SelectedType}}&type={{.SelectedType}}{{end}}">&#8592;</a>
-                         {{ end }}
-                     </div>
+        {{/* Systeme de pagination */}}
+        <div class="pokemon-pagination">
+            <div class="pager-group">
+                {{ if eq .Offset 0 }}
+                    <span class="pager pager-left disabled">&#8592;</span>
+                {{ else }}
+                    {{/* (Source : StackOverFlow + IA) */}}
+                    {{/* Permet de faire un lien vers la page précédente en gardant les paramètres de recherche et de type */}}
+                    <a class="pager pager-left" href="/pokemon?offset={{.PrevOffset}}{{if .Search}}&search={{.Search}}{{end}}{{if .SelectedType}}&type={{.SelectedType}}{{end}}">&#8592;</a>
+                {{ end }}
+            </div>
 
-                     <div class="pager-group">
-                         <a class="pager pager-right" href="/pokemon?offset={{.NextOffset}}{{if .Search}}&search={{.Search}}{{end}}{{if .SelectedType}}&type={{.SelectedType}}{{end}}">&#8594;</a>
-                     </div>
-                 </div>
-             </div>
+            {{/* (Source : StackOverFlow + IA) */}}
+            {{/* Permet de faire un lien vers la page suivante en gardant les paramètres de recherche et de type */}}
+            <div class="pager-group">
+                <a class="pager pager-right" href="/pokemon?offset={{.NextOffset}}{{if .Search}}&search={{.Search}}{{end}}{{if .SelectedType}}&type={{.SelectedType}}{{end}}">&#8594;</a>
+            </div>
+        </div>
     </main>
 </body>
 </html>

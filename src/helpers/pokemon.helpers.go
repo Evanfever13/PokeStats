@@ -6,7 +6,14 @@ import (
 	"strconv"
 )
 
+/*=========================================================
+  HELPER : Redirection a la page Home.html
+  =========================================================*/
+
+// (Source : Moodle)
+// Permet la redirection à la page Home.html
 func RedirectToError(w http.ResponseWriter, r *http.Request, code int, message string) {
+	//Recupere le Code et le Message
 	params := url.Values{}
 	if code > 0 {
 		params.Set("code", strconv.Itoa(code))
@@ -15,6 +22,7 @@ func RedirectToError(w http.ResponseWriter, r *http.Request, code int, message s
 		params.Set("message", message)
 	}
 
+	//Redirige vers Home.html
 	pathTarget := "/error"
 	if encodeParams := params.Encode(); encodeParams != "" {
 		pathTarget += "?" + encodeParams

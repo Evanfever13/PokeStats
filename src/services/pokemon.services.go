@@ -5,10 +5,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
 	"time"
 )
 
+/*=========================================================
+  SERVICES : Recupération des données des Endpoint
+  =========================================================*/
+
+/*Pokemon*/
+// Récupere tout les pokemons
 func PokemonService(offset int) (*models.PokemonResponse, int, error) {
 
 	client := http.Client{
@@ -42,45 +47,7 @@ func PokemonService(offset int) (*models.PokemonResponse, int, error) {
 	return &listPokemon, response.StatusCode, nil
 }
 
-func GetTypes() ([]string, int, error) {
-	client := http.Client{Timeout: 5 * time.Second}
-	url := "https://pokeapi.co/api/v2/type"
-	request, requestErr := http.NewRequest(http.MethodGet, url, nil)
-	if requestErr != nil {
-		return nil, http.StatusInternalServerError, fmt.Errorf("erreur initialisation requete - %s", requestErr.Error())
-	}
-
-	response, responseErr := client.Do(request)
-	if responseErr != nil {
-		return nil, http.StatusInternalServerError, fmt.Errorf("erreur envoi requete - %s", responseErr.Error())
-	}
-	defer response.Body.Close()
-
-	if response.StatusCode != http.StatusOK {
-		return nil, response.StatusCode, fmt.Errorf("erreur reponse requete - code : %d, status : %s", response.StatusCode, response.Status)
-	}
-
-	var payload struct {
-		Results []struct {
-			Name string `json:"name"`
-			Url  string `json:"url"`
-		} `json:"results"`
-	}
-
-	decodeErr := json.NewDecoder(response.Body).Decode(&payload)
-	if decodeErr != nil {
-		return nil, http.StatusInternalServerError, fmt.Errorf("erreur decodage des données - %s", decodeErr.Error())
-	}
-
-	types := make([]string, 0, len(payload.Results))
-	for _, t := range payload.Results {
-		types = append(types, t.Name)
-	}
-
-	return types, http.StatusOK, nil
-}
-
-// PokemonByType retourne la liste des pokemons pour un type donné (avec pagination côté client)
+// Retourne la liste des pokemons pour un type donné
 func PokemonByType(typeName string, offset int) (*models.PokemonResponse, int, error) {
 	client := http.Client{Timeout: 5 * time.Second}
 	url := fmt.Sprintf("https://pokeapi.co/api/v2/type/%s", typeName)
@@ -137,6 +104,7 @@ func PokemonByType(typeName string, offset int) (*models.PokemonResponse, int, e
 	return res, http.StatusOK, nil
 }
 
+// Cherche les pokemons avec Id corspondant ou avec le nom qui contient la recherche
 func PokemonByNameOrID(name string) (*models.PokemonResponse, int, error) {
 	client := http.Client{Timeout: 5 * time.Second}
 	url := fmt.Sprintf("https://pokeapi.co/api/v2/pokemon/%s", name)
@@ -172,6 +140,8 @@ func PokemonByNameOrID(name string) (*models.PokemonResponse, int, error) {
 	return res, http.StatusOK, nil
 }
 
+/*Pokemon Details*/
+// Récupere les Details d'un Pokemon
 func GetPokemonDetails(idOrName string) (*models.PokemonDetails, int, error) {
 	client := http.Client{Timeout: 5 * time.Second}
 	url := fmt.Sprintf("https://pokeapi.co/api/v2/pokemon/%s", idOrName)
@@ -245,6 +215,8 @@ func GetPokemonDetails(idOrName string) (*models.PokemonDetails, int, error) {
 	return details, http.StatusOK, nil
 }
 
+/*Move*/
+// Récupere toutes les attaques
 func MoveService(offset int) (*models.MoveResponse, int, error) {
 	client := http.Client{Timeout: 5 * time.Second}
 	url := fmt.Sprintf("https://pokeapi.co/api/v2/move?offset=%d", offset)
@@ -272,6 +244,7 @@ func MoveService(offset int) (*models.MoveResponse, int, error) {
 	return &listMoves, response.StatusCode, nil
 }
 
+// Cherche les attaques avec Id corspondant ou avec le nom qui contient la recherche
 func MoveByNameOrID(name string) (*models.MoveResponse, int, error) {
 	client := http.Client{Timeout: 5 * time.Second}
 	url := fmt.Sprintf("https://pokeapi.co/api/v2/move/%s", name)
@@ -307,6 +280,8 @@ func MoveByNameOrID(name string) (*models.MoveResponse, int, error) {
 	return res, http.StatusOK, nil
 }
 
+/*Move Details*/
+// Récupere les Details d'une Attaque
 func GetMoveDetails(idOrName string) (*models.MoveDetails, int, error) {
 	client := http.Client{Timeout: 5 * time.Second}
 	url := fmt.Sprintf("https://pokeapi.co/api/v2/move/%s", idOrName)
@@ -373,51 +348,10 @@ func GetMoveDetails(idOrName string) (*models.MoveDetails, int, error) {
 
 	return details, http.StatusOK, nil
 }
+
+/*Teams*/
+// Retourne les Favoris
 func TeamsService(idOrName string) (*models.PokemonDetails, int, error) {
 	// Reuse existing GetPokemonDetails to retrieve a single pokemon's details
 	return GetPokemonDetails(idOrName)
-}
-
-// SearchPokemon retrieves the full list of pokemons and filters by name substring (case-insensitive)
-func SearchPokemon(query string) (*models.PokemonResponse, int, error) {
-	client := http.Client{Timeout: 5 * time.Second}
-	// Retrieve all pokemons (limit large enough to include all)
-	url := "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
-	request, requestErr := http.NewRequest(http.MethodGet, url, nil)
-	if requestErr != nil {
-		return nil, http.StatusInternalServerError, fmt.Errorf("erreur initialisation requete - %s", requestErr.Error())
-	}
-
-	response, responseErr := client.Do(request)
-	if responseErr != nil {
-		return nil, http.StatusInternalServerError, fmt.Errorf("erreur envoi requete - %s", responseErr.Error())
-	}
-	defer response.Body.Close()
-
-	if response.StatusCode != http.StatusOK {
-		return nil, response.StatusCode, fmt.Errorf("erreur reponse requete - code : %d, status : %s", response.StatusCode, response.Status)
-	}
-
-	var payload struct {
-		Results []struct {
-			Name string `json:"name"`
-			Url  string `json:"url"`
-		} `json:"results"`
-	}
-
-	decodeErr := json.NewDecoder(response.Body).Decode(&payload)
-	if decodeErr != nil {
-		return nil, http.StatusInternalServerError, fmt.Errorf("erreur decodage des données - %s", decodeErr.Error())
-	}
-
-	matches := make([]models.Pokemon, 0)
-	q := strings.ToLower(strings.TrimSpace(query))
-	for _, r := range payload.Results {
-		if strings.Contains(strings.ToLower(r.Name), q) {
-			matches = append(matches, models.Pokemon{Name: r.Name, Url: r.Url})
-		}
-	}
-
-	res := &models.PokemonResponse{Results: matches}
-	return res, http.StatusOK, nil
 }

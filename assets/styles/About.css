@@ -5,6 +5,8 @@
     text-decoration: none;
 }
 
+/*Fonts*/
+
 @font-face{
     font-family: 'Gill Sans Local';
     src: url('../font/Gill Sans.otf') format('opentype');
@@ -13,13 +15,23 @@
     font-display: swap;
 }
 
+@font-face{
+    font-family: 'Gill Sans Local';
+    src: url('../font/Gill Sans Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*Body*/
+
 body{
     font-family: 'Gill Sans Local', 'Gill Sans', 'GillSans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     background: #fafafa;
     color: #111;
 }
 
-/* Header (keeps consistency with other pages) */
+/*Header*/
 header{
     display: flex;
     align-items: center;
@@ -67,11 +79,16 @@ header a.logo:hover, header a.mainlogo:hover{
     opacity: 0.9;
 }
 
+/*Main*/
+
 main{
     max-width: 1100px;
     margin: 24px auto;
     padding: 24px 16px;
 }
+
+/*ABOUT.HTML*/
+/*Bloc About*/
 
 .BlocAbout{
     background: #fff;
@@ -80,5 +97,9 @@ main{
     padding: 20px;
     box-shadow: 0 6px 18px rgba(10,10,10,0.03);
 }
-.BlocAbout h1{font-size:22px;margin-bottom:12px}
-.BlocAbout p{color:#444;line-height:1.4;margin:0 0 8px 0}
+.BlocAbout h1{
+    font-size:22px;margin-bottom:12px
+}
+.BlocAbout p{
+    color:#444;line-height:1.4;margin:0 0 8px 0
+}

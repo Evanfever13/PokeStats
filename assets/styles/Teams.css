@@ -72,3 +72,60 @@ header a.mainlogo{
 	justify-content: center;
 	padding: 4px;
 }
+header a.mainlogo img{
+	height: 96px;
+	object-fit: contain;
+}
+header a.logo:hover, header a.mainlogo:hover{
+	opacity: 0.9;
+}
+
+/* TEAM.HTML */
+
+.teams-grid{
+	display: grid;
+	grid-template-columns: repeat(6, 160px);
+	justify-content: center;
+	gap: 32px;
+	align-items: start;
+	margin: 12px auto;
+	margin-left: 52px;
+}
+.pokemon-card{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 16px;
+	border-radius: 12px;
+	transition: transform 160ms ease, box-shadow 160ms ease;
+	background: #fff;
+	border: 1px solid #eee;
+}
+.pokemon-card:hover{
+	transform: translateY(-6px);
+	box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+}
+.pokemon-name{
+	font-family: 'Gill Sans Local', 'Gill Sans', 'GillSans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+	color: #111;
+	text-decoration: none;
+}
+.pokemon-number{
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 6px;
+}
+.pokemon-img{
+	width: 140px;
+	height: 140px;
+	object-fit: contain;
+	margin-top: 6px;
+	background: linear-gradient(180deg, #fff, #f6f9ff);
+	padding: 10px;
+	border-radius: 10px;
+}

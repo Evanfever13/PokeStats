@@ -47,6 +47,7 @@
 
     </header>
 
+    {{/* Barre de recherche pour les attaques */}}
     <div class="search-bar">
         <form method="get" action="/moves" class="search-form">
             <input type="text" name="search" placeholder="Search move by name or ID" value="{{.Search}}" />
@@ -58,10 +59,10 @@
        <div class="pokemon-center">
          <div class="pokemon-grid">
                  {{range .Results}}
-                    <a class="pokemon-link" href="/moves/details?id={{pokemonID .Url}}">
+                    <a class="pokemon-link" href="/moves/details?id={{.ID}}">
                         <div class = "BlocWelcome pokemon-card">
                                 <div class="pokemon-name">{{.Name}}</div>
-                                <div class="pokemon-number">#{{pokemonID .Url}}</div>
+                                <div class="pokemon-number">{{.ID}}</div>
                                 <div class="move-desc">&nbsp;</div>
                         </div>
                     </a>

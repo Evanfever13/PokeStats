@@ -93,6 +93,7 @@ main{
 	align-items: start;
 }
 
+/*POKEMON/MOVES-DETAIL.HTML*/
 /* Details */
 
 .detail-info{
@@ -101,7 +102,6 @@ main{
 	border-radius: 14px;
 	box-shadow: 0 14px 40px rgba(16,24,40,0.08);	
 }
-
 .detail-grid{
 	display: flex;
 	flex-direction: row;
@@ -117,7 +117,6 @@ main{
 	background: #f6f7f9;
 	box-shadow: 0 10px 30px rgba(12,18,38,0.06);
 }
-
 .detail-info h1{
 	font-size: 34px;
 	margin-bottom: 12px;
@@ -128,7 +127,6 @@ main{
 	color: #666;
 	font-weight: 400;
 }
-
 .detail-info h3{
 	margin-top: 16px;
 	margin-bottom: 8px;
@@ -140,7 +138,6 @@ main{
 	line-height: 1.6;
 	font-size: 16px;
 }
-
 .detail-info ul{
 	list-style: none;
 	padding: 0;
@@ -151,6 +148,8 @@ main{
 	border-bottom: 1px dashed #f0f0f0;
 	font-size: 15px;
 }
+
+/*button*/
 
 .button{
 	display: inline-block;
@@ -170,15 +169,8 @@ main{
 	transform: translateY(-3px);
 }
 
-@media (max-width: 900px){
-	main{ max-width: 100%; padding: 0 12px; grid-template-columns: 1fr; }
-	.detail-grid:has(.detail-image){ grid-template-columns: 1fr; }
-	header{ padding: 12px 14px; }
-	header a.mainlogo img{ height: 80px; }
-	.detail-info{ padding: 20px; }
-}
 
-/* Type badges used in pokemon details */
+/* Types */
 .types{
 	display: flex;
 	gap: 10px;
@@ -193,8 +185,4 @@ main{
 	border-radius: 8px;
 	background: transparent;
 	display: inline-block;
-}
-
-@media (max-width: 600px){
-	.type-badge{ width: 72px; height: 30px; }
 }

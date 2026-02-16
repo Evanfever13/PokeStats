@@ -1,14 +1,19 @@
 package models
 
+/*=========================================================
+  MODELS : Structure de données
+  =========================================================*/
+
+//Pokemon
 type PokemonResponse struct {
 	Results []Pokemon `json:"results"`
 }
-
 type Pokemon struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`
 }
 
+//Pokemon Details
 type PokemonDetails struct {
 	ID        int            `json:"id"`
 	Name      string         `json:"name"`
@@ -18,15 +23,16 @@ type PokemonDetails struct {
 	Abilities []string       `json:"abilities"`
 }
 
+//Move
 type MoveResponse struct {
 	Results []Move `json:"results"`
 }
-
 type Move struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`
 }
 
+//Move Details
 type MoveDetails struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
@@ -39,10 +45,10 @@ type MoveDetails struct {
 	ShortEffect string `json:"short_effect"`
 }
 
+//Team
 type TeamResponse struct {
 	Results []Team `json:"results"`
 }
-
 type Team struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`

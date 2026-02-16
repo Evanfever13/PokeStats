@@ -93,7 +93,7 @@ main{
 }
 
 /* HOME.HTML */
-
+/*Bloc Welcome*/
 .BlocWelcome{
 	background: #fff;
 	border: 1px solid #eee;
@@ -126,6 +126,8 @@ main{
 	opacity: 0.95;
 }
 
+/*Bloc GetStarted*/
+
 .BlocGetStarted{
 	background: #fff;
 	border: 1px solid #eee;
@@ -154,6 +156,8 @@ main{
 	opacity: 0.95;
 }
 
+/*Bloc Image*/
+
 .BlocImage{
 	background: #fff;
 	border: 1px solid #eee;
@@ -171,6 +175,8 @@ main{
 	margin-left: 5%;
 	margin-right: 5%;
 }
+
+/*Bloc About*/
 
 .BlocAbout{
 	background: #fff;
@@ -199,6 +205,7 @@ main{
 	opacity: 0.95;
 }
 
+/*Hover*/
 .BlocImage:hover, .BlocAbout:hover, .BlocWelcome:hover, .BlocGetStarted:hover{
 	transform: translateY(-6px);
 	box-shadow: 0 12px 30px rgba(16,24,40,0.06);

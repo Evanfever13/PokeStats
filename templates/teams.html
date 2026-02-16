@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokestats</title>
     <link rel="stylesheet" href="/static/styles/Teams.css">
+    <link rel="stylesheet" href="/static/styles/Home.css">
 </head>
 <body>
+    {{/* Permet d'afficher le header 1 fois */}}
     {{if .Header}}
     <header class="site-header">
         <a href="/" class="logo">
@@ -45,16 +47,36 @@
         </a>
     </header>
     {{end}}
+
     <main>
         <div class="teams-center">
             <div class="teams-grid">
+
+                    {{/* (Source StackOverflow + IA) */}}
+                    {{/* Pour chaque Pokemon en favoris */}}
+
+                    {{/* $i = Index du pokemon */}}
+                    {{/* $t = Pokemon */}}
+
                     {{range $i, $t := .Teams}}
+
                         <div class="BlocWelcome pokemon-card">
+
+                            {{/* Mettre un Bouton supprimer */}}
                             <a class="remove-button" href="/teams?remove={{$t.ID}}">Remove</a>
+
+                            {{/* Crée un lien vers la page Details du pokemon */}}
                             <a class="pokemon-link" href="/pokemon/details?id={{$t.ID}}">
+
+                                {{/* Afficher le nom du pokemon */}}
                                 <div class="pokemon-name" style="text-transform: capitalize">{{$t.Name}}</div>
+
+                                {{/* Afficher l'ID du pokemon */}}
                                 <div class="pokemon-number">#{{$t.ID}}</div>
+
+                                {{/* Afficher l'image pokemon */}}
                                 <img src="{{$t.Image}}" alt="{{$t.Name}}" class="pokemon-img">
+                                
                             </a>
                         </div>
                     {{end}}

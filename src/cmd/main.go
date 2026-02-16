@@ -6,19 +6,23 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 )
 
+// Fonction Principal
 func main() {
+	//Charge les templates
 	templates.Load()
+
+	//Crée un routeur
 	mux := routers.MainRouter()
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+
+	//Setup du localhost
+	port := "8000"
 	addr := fmt.Sprintf("localhost:%s", port)
 	fmt.Printf("Serveur prêt sur http://%s\n", addr)
 	err := http.ListenAndServe(addr, mux)
+
+	//Gestion d'erreur
 	if err != nil {
 		log.Fatalf("Erreur lancement serveur : %s\n", err.Error())
 	}
