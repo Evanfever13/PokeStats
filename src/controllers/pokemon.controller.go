@@ -52,9 +52,11 @@ func PokemonDisplay(w http.ResponseWriter, r *http.Request) {
 	//Recherche (elle est prioritaire par rapport au tri)
 	if search != "" {
 		if _, convErr := strconv.Atoi(search); convErr == nil {
+			// Si l'utilisateur a saisi un nombre, rechercher par ID exact
 			data, status, err = services.PokemonByNameOrID(search)
 		} else {
-			data, status, err = services.PokemonByNameOrID(search)
+			// Recherche partielle insensible à la casse (ex: "pika" -> pikachu)
+			data, status, err = services.SearchPokemonByPartial(search, offset)
 		}
 
 		//Tri
@@ -253,4 +255,25 @@ func TeamsDisplay(w http.ResponseWriter, r *http.Request) {
 		"Teams":  teamDetails,
 	}
 	templates.RenderTemplate(w, r, "Teams", payload)
+}
+
+// Page Error
+func ErrorDisplay(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+	codeStr := query.Get("code")
+	message := query.Get("message")
+
+	code := 0
+	if codeStr != "" {
+		if v, err := strconv.Atoi(codeStr); err == nil {
+			code = v
+		}
+	}
+
+	payload := map[string]interface{}{
+		"Code":    code,
+		"Message": message,
+	}
+
+	templates.RenderTemplate(w, r, "Error", payload)
 }

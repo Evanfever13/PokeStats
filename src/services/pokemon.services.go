@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -137,6 +138,58 @@ func PokemonByNameOrID(name string) (*models.PokemonResponse, int, error) {
 		Url:  fmt.Sprintf("https://pokeapi.co/api/v2/pokemon/%d/", payload.ID),
 	}
 	res := &models.PokemonResponse{Results: []models.Pokemon{p}}
+	return res, http.StatusOK, nil
+}
+
+// Recherche partielle des pokemons par nom
+func SearchPokemonByPartial(query string, offset int) (*models.PokemonResponse, int, error) {
+	client := http.Client{Timeout: 5 * time.Second}
+	// Récupère la liste complète des pokemons
+	url := "https://pokeapi.co/api/v2/pokemon?limit=2000"
+	request, requestErr := http.NewRequest(http.MethodGet, url, nil)
+	if requestErr != nil {
+		return nil, http.StatusInternalServerError, fmt.Errorf("erreur initialisation requete - %s", requestErr.Error())
+	}
+
+	response, responseErr := client.Do(request)
+	if responseErr != nil {
+		return nil, http.StatusInternalServerError, fmt.Errorf("erreur envoi requete - %s", responseErr.Error())
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		return nil, response.StatusCode, fmt.Errorf("erreur reponse requete - code : %d, status : %s", response.StatusCode, response.Status)
+	}
+
+	var list models.PokemonResponse
+	decodeErr := json.NewDecoder(response.Body).Decode(&list)
+	if decodeErr != nil {
+		return nil, http.StatusInternalServerError, fmt.Errorf("erreur decodage des données - %s", decodeErr.Error())
+	}
+
+	q := strings.ToLower(strings.TrimSpace(query))
+	matches := make([]models.Pokemon, 0)
+	for _, p := range list.Results {
+		if strings.Contains(strings.ToLower(p.Name), q) {
+			matches = append(matches, p)
+		}
+	}
+
+	// Pagination côté client
+	limit := 20
+	start := offset
+	if start < 0 {
+		start = 0
+	}
+	end := start + limit
+	if start > len(matches) {
+		start = len(matches)
+	}
+	if end > len(matches) {
+		end = len(matches)
+	}
+
+	res := &models.PokemonResponse{Results: matches[start:end]}
 	return res, http.StatusOK, nil
 }
 

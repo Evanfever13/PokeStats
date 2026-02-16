@@ -26,6 +26,7 @@ func PokeRouter(router *http.ServeMux) {
 	router.HandleFunc("/", controllers.HomeDisplay)
 	router.HandleFunc("/pokemon", controllers.PokemonDisplay)
 	router.HandleFunc("/moves", controllers.MovesDisplay)
+	router.HandleFunc("/error", controllers.ErrorDisplay)
 	router.HandleFunc("/about", controllers.AboutDisplay)
 	router.HandleFunc("/teams", controllers.TeamsDisplay)
 	router.HandleFunc("/moves/details", controllers.MovesDetailsDisplay)

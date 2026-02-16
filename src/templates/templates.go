@@ -28,6 +28,9 @@ func Load() {
 		"pokemonID": func(u string) string {
 			return path.Base(strings.TrimSuffix(u, "/"))
 		},
+		"resourceID": func(u string) string {
+			return path.Base(strings.TrimSuffix(u, "/"))
+		},
 	}
 
 	//Cherche les template dans "./../../templates/*.html"

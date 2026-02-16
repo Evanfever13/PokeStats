@@ -7,11 +7,11 @@ import (
 )
 
 /*=========================================================
-  HELPER : Redirection a la page Home.html
+  HELPER : Redirection a la page error.html
   =========================================================*/
 
 // (Source : Moodle)
-// Permet la redirection à la page Home.html
+// Permet la redirection à la page error.html
 func RedirectToError(w http.ResponseWriter, r *http.Request, code int, message string) {
 	//Recupere le Code et le Message
 	params := url.Values{}
@@ -22,7 +22,7 @@ func RedirectToError(w http.ResponseWriter, r *http.Request, code int, message s
 		params.Set("message", message)
 	}
 
-	//Redirige vers Home.html
+	//Redirige vers error.html
 	pathTarget := "/error"
 	if encodeParams := params.Encode(); encodeParams != "" {
 		pathTarget += "?" + encodeParams

@@ -1,0 +1,58 @@
+/*ERROR.HTML*/
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+    color: #222;
+}
+
+.error-container {
+    max-width: 720px;
+    margin: 6vh auto;
+    padding: 2.25rem;
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(16,24,40,0.08);
+    text-align: center;
+}
+
+.error-container h1 {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem 0;
+    color: #d64545;
+}
+
+.error-container .lead {
+    margin: 0 0 1rem 0;
+    color: #374151;
+    font-size: 1.05rem;
+}
+
+.Error.Code {
+    font-weight: 700;
+    color: #6b7280;
+    margin-top: 0.75rem;
+}
+
+.Error.Message {
+    color: #374151;
+    margin-top: 0.25rem;
+    white-space: pre-wrap;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.65rem 1.15rem;
+    background: #0b62ff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(11,98,255,0.12);
+}
+
+@media (max-width: 520px) {
+    .error-container { margin: 4vh 1rem; padding: 1.25rem; }
+    .error-container h1 { font-size: 1.9rem; }
+}

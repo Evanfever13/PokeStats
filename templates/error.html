@@ -1,0 +1,22 @@
+{{define "Error"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/Error.css">
+    <title>PokeStats - Erreur</title>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Erreur</h1>
+        <p class="lead">An error has occurred.</p>
+
+        <p class="Error Code">Code : {{.Code}}</p>
+        <p class="Error Message">Message: {{.Message}}</p>
+
+        <a href="/" class="button">Back to home</a>
+    </div>
+</body>
+</html>
+{{end}}
